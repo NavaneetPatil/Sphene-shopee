@@ -1,0 +1,15 @@
+{
+    "bestSeller":
+       [{ "id":11,"name": "Casual Shoes", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-01.jpg" },
+       { "id":12,"name": "Sunglasses", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-03.jpg" },
+        {"id":13, "name": "Red Backpack", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-02.jpg" }],
+    "topRated":
+     [{ "id":1,"name": "Blue Cap", "price": 20, "stars":5, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-04.jpg" },
+      { "id":14,"name": "Tie'", "price": 20, "stars":3, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-05.jpg" },
+      { "id":15,"name": "Leather HandBag","stars":4, "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-06.jpg" }],
+    "onSale":
+        [{"id":16, "name": "Leather HandBag", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-06.jpg" },
+        { "id":17,"name": "Sunglasses", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-03.jpg" },
+        { "id":18,"name": "Red Backpack", "price": 20, "url": "http://www.vasterad.com/themes/sphene/images/shop-widget-02.jpg" }]
+
+}

@@ -1,0 +1,42 @@
+ul{
+    padding:0;
+    margin:0;
+}
+.col-3{
+    width: 25%;
+}
+.col-4{
+    width: 33% ;
+}
+.col-5{
+    width: 41.6%;
+}
+.col-6{
+    width: 50%;
+}
+
+@media (min-width: 250px) and (max-width: 768px) {
+    .col-3{
+        width: 100%;
+    }
+    .col-4{
+        width: 100% ;
+    }
+    .col-5{
+        width: 100%;
+    }
+    .col-6{
+        width: 100%;
+    }
+    .sm-none{
+        display: none;
+    }
+  }
+@media (min-width: 769px) and (max-width: 1239px) {
+      width:970px;
+    }
+@media (min-width: 1240px) {
+      width:1210px;
+    }
+
+    

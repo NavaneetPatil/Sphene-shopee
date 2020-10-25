@@ -1,0 +1,31 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB6VesCQjRuCgOif7y7DQw6XsYp9cPD6p0",
+    authDomain: "sphene-e5361.firebaseapp.com",
+    databaseURL: "https://sphene-e5361.firebaseio.com",
+    projectId: "sphene-e5361",
+    storageBucket: "sphene-e5361.appspot.com",
+    messagingSenderId: "124702255591",
+    appId: "1:124702255591:web:eacf7ada4763ad74bf3542"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+
+DB-test mode
+{
+  "rules": {
+    ".read": "now < 1605637800000",  // 2020-11-18
+    ".write": "now < 1605637800000",  // 2020-11-18
+  }
+}
