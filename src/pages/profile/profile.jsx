@@ -2,42 +2,44 @@ import React, { Component } from 'react';
 import { Container } from '../../commonComponents';
 import Navigation from '../../components/navigation/navigation.component';
 import Footer from '../../components/footer/footer';
+import ColorSwitcher from '../../components/colorSwitcher/ColorSwitcher';
 import { FieldDiv, WelcomeTittle, ProfileWrapper,SuggestionBox } from './styles';
 import { connect } from 'react-redux';
 
 class Profile extends Component {
-        constructor(props) {
-        super(props);
+    //     constructor(props) {
+    //     super(props);
     
-        this.state = {
-          name: 'John veles',
-          changeName:false
-        };
-      }
-    handleChange = event => {
-        const { value, name } = event.target;
-        this.setState({ [name]: value });
-      };
-      nameResetHandler = () => {
-          var val =  this.state.changeName ? false : true ;
-          this.setState({changeName: val });
-      }
+    //     this.state = {
+    //       name: 'John veles',
+    //       changeName:false
+    //     };
+    //   }
+    // handleChange = event => {
+    //     const { value, name } = event.target;
+    //     this.setState({ [name]: value });
+    //   };
+    //   nameResetHandler = () => {
+    //       var val =  this.state.changeName ? false : true ;
+    //       this.setState({changeName: val });
+    //   }
 
     render() {
         return (
             <>
                 <Navigation />
+                <ColorSwitcher/>
                 <Container>
                     <ProfileWrapper>
                         <WelcomeTittle>welcome </WelcomeTittle>
-                        <h3>Username</h3>
+                        {/* <h3>Username</h3>
                         <FieldDiv>
                         <input 
                         name='name'
                         value={this.state.name}
                         onChange = {this.state.changeName ? this.handleChange  :  null } ></input>
                         <button onClick={this.nameResetHandler}>{this.state.changeName ? 'Save' : 'Click to change' }</button>
-                        </FieldDiv>
+                        </FieldDiv> */}
 
                         <h3>Email</h3>
                         <FieldDiv>{this.props.email}</FieldDiv>

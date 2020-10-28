@@ -157,3 +157,15 @@ border:2px solid ${(props)=>props.theme.themeColor};
 }
 
 `
+export const SuccessMsg = styled.h4`
+color:${props=>props.theme.color.lightest};
+font-weight:${props=>props.theme.fontWeight.bold};
+background-color:${props=>props.theme.backgroundColor.green};
+display: block;
+width: 100%;
+padding: 10px;
+`
+export const FailMsg = styled.h4`
+color:${props=>props.theme.color.fail};
+font-weight:${props=>props.theme.fontWeight.bold};
+`

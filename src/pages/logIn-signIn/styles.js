@@ -73,6 +73,11 @@ export const  PasswordWrong  = styled.h4`
 color:${props=>props.theme.color.alert};
 font-size:${props=>props.theme.fontSize.primary};
 `
+export const  Success  = styled(PasswordWrong)`
+color:${props=>props.theme.color.lightest};
+background-color:${props=>props.theme.backgroundColor.btnGreen};
+font-size:${props=>props.theme.fontSize.primary};
+`
 
 export const LoginH3 = styled.div`
 font-family:${props=>props.theme.fontFamily.montserrat};

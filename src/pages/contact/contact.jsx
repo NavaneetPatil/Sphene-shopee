@@ -6,10 +6,10 @@ import BackToTop from '../../components/backtotop/backToTop';
 import { Container } from '../../commonComponents';
 import {ColWrapper} from '../../components/productChart/styles';
 import ContactCard from '../../components/contactCard/contactCard';
-import {ContactWelcomeWrapper,FormBtn,Textarea,ContactForm,MapDiv,OfficeAddressWrapper,OurDetailsWrapper} from './styles';
+import {ContactWelcomeWrapper,SuccessMsg,FailMsg,FormBtn,Textarea,ContactForm,MapDiv,OfficeAddressWrapper,OurDetailsWrapper} from './styles';
 import ColorSwitcher from '../../components/colorSwitcher/ColorSwitcher';
 import {BlackScreen} from '../../commonComponents';
-//import axios from 'axios';
+import axios from 'axios';
 
 class Contact extends Component {
   constructor() {
@@ -20,7 +20,9 @@ class Contact extends Component {
       email: '',
       subject: '',
       messege: '',
-      formSubmitted:false
+      formSubmitted:false,
+      validateForm:false,
+      wrongEmail:false
     };
   }
 
@@ -28,21 +30,42 @@ class Contact extends Component {
   handleChange=(event)=>{
     const { name, value } = event.target;
     this.setState({ [name]: value });
-  }
-  submitHandler=()=>{
-    this.setState({name:'',email:'',subject:'',messege:'',formSubmitted:true});
+
+    if(this.state.validateForm===true){
+      this.setState({validateForm:false});
+    }
+    if(this.state.wrongEmail===true){
+      this.setState({wrongEmail:false});
+    }
 
   }
-  // formSubmitHandler=(event)=>{
-  //   axios.post( 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBfd2HjJmstw4eqJzmzOmkOluVKNqs6yZc',
-  //   {
-  //       email:'a2b@gmail.com',
-  //       password:'23a4556'
-  //   } )
-  //   .then( response => {
-  //       console.log( response );
-  //   } );
-  //  }
+
+  formSubmitHandler=(event)=>{
+    if(this.state.name=='' || this.state.email=='' || this.state.messege=='' || this.state.messege==''){
+      this.setState({validateForm:true});
+      return;
+     }
+     if(!this.state.email.includes('@')){
+      this.setState({wrongEmail:true});
+      return;
+     }
+    axios.post( 'https://foodrecipejson.firebaseio.com/.json',
+    { 
+        name:this.state.name,
+        email:this.state.email,
+        subject:this.state.subject,
+        messege:this.state.messege,
+    } )
+    .then( response => {
+        //console.log( 'the response obtained from api is ',response );
+        this.setState({name:'',email:'',subject:'',messege:'',formSubmitted:true});
+        //success
+    } );
+     
+     
+ 
+
+   }
 
   render(){
     const { name,subject,email,messege} = this.state;
@@ -119,8 +142,10 @@ class Contact extends Component {
             placeholder="Messege"
             onChange={this.handleChange} >
             </Textarea>
-            <FormBtn onClick={this.submitHandler}>SUBMIT MESSEGE</FormBtn>
-            <h4>{this.state.formSubmitted ? 'Submitted!!' : null}</h4>
+            <FormBtn onClick={this.formSubmitHandler}>SUBMIT MESSEGE</FormBtn>
+            <SuccessMsg>{this.state.formSubmitted ? 'Submitted successfully!!' : null}</SuccessMsg>
+            <FailMsg>{this.state.validateForm ? 'Please fill all fields' : null}</FailMsg>
+            <FailMsg>{this.state.wrongEmail ? 'invalid email' : null}</FailMsg>
             </ContactForm>
             
           </ColWrapper>

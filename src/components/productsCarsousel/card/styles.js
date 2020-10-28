@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const CardWrapper=styled.div`
-margin: 0 0 30px 0;
+margin-left:15px;
+margin-right:15px;
+margin-bottom:30px;
 display: flex;
 flex-wrap:wrap;
 background-color: #fff;
 width: 240.25px;
-margin-right: 31px;
 position: relative;
 min-height: 1px;
 float: left;

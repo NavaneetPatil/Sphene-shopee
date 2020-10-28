@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Card from './card/Card';
 import {CategoryTittle,Container} from '../../commonComponents';
-import {Carousel,VertBtnRight,VertBtnLeft,SliderFrame,Slider} from './styles';
+import {VertBtnRight,VertBtnLeft,CarouselWrapper,CardWrapper} from './styles';
+import Slider from "react-slick";
+
+
 
 import shirtLink from '../../assets/images/shop-07.jpg';
 import capLink from '../../assets/images/shop-03.jpg';
@@ -19,48 +22,90 @@ var obj=[
     {name:'shirt',price:20,url:shirtLink,id:40},
 ]
 
+function VertBtnRightt(props) {
+  const { onClick } = props;
+  return (
+    <VertBtnRight
+      onClick={onClick}
+    />
+  );
+}
+function VertBtnLeftt(props) {
+  const { onClick } = props;
+  return (
+    <VertBtnLeft
+      onClick={onClick}
+    />
+  );
+}
+
+
 
 class ProductsCarousel extends Component {
     state={
         shift:0,
         obj
     };
-    prevClickHandler=(event)=>{
-        if(this.state.shift < 0){
-        var shift=this.state.shift+265;
-        this.setState({shift:shift});
-        }
-    }
-    nextClickHandler=(event)=>{ 
-        if(this.state.shift > -535){
-            var shift=this.state.shift-265;
-            this.setState({shift:shift});
-        }
-
-    }
     render(){
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      nextArrow: <VertBtnRightt></VertBtnRightt>,
+      prevArrow:<VertBtnLeftt></VertBtnLeftt>,
+      responsive: [
+        {
+          breakpoint: 1025,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+  
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            initialSlide: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+        
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
       return(      
       <div>
         <Container>
          <CategoryTittle>New Araivals</CategoryTittle>
-         <Carousel>
-             <SliderFrame>
-             <Slider transform={this.state.shift+'px'}>
+         <CarouselWrapper>
+
+             <Slider {...settings} className="slider">
                  {this.state.obj.map((product)=>{
                      return(
+                         <CardWrapper>
                         <Card 
                         key={product.id}
                         url={product.url}
                         name={product.name} 
                         price='20'
                         />
+                         </CardWrapper>
+   
                      );
                  })}
-            </Slider>
-             </SliderFrame>
-             <VertBtnRight onClick={this.nextClickHandler}></VertBtnRight>
-             <VertBtnLeft onClick={this.prevClickHandler}></VertBtnLeft>
-         </Carousel>
+                 </Slider>
+                 </CarouselWrapper>       
          </Container> 
       </div>
       );

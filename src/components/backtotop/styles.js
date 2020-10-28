@@ -18,7 +18,7 @@ font-size: ${props=>props.theme.fontSize.h3small};
 position:fixed;
 bottom:25px;
 right:30px;
-z-index:5;
+z-index:50;
 &::after{
     content: "\f106";
     font-family: ${props=>props.theme.fontFamily.fontawesome};

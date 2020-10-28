@@ -12,6 +12,7 @@ let a={
         alert:'red',
         grey:'grey',
         gold:'#ffc741',
+        fail:'red',
       },
       backgroundColor:{
           lightest: 'white',

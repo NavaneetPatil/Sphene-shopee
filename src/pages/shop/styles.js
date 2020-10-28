@@ -24,6 +24,8 @@ h2{
 `
 export const ProductCardBox=styled.div `
 width:75%;
+display: flex;
+justify-content: flex-start;
 @media (min-width: 250px) and (max-width: 768px) {
  width:100%;
 }

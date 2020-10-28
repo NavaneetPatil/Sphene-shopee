@@ -13,6 +13,7 @@ margin-left: auto;
     width:1210px;
   }
   `
+
   export const CategoryTittle = styled.h3`
   margin: 58px 0 48px 0;
   font-size: 28px;
@@ -23,7 +24,7 @@ margin-left: auto;
   export const AllProductsWrapper = styled.div`
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:flex-start;
   margin:0 20px;
   width:100%;
 

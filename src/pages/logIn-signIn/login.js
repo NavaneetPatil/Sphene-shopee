@@ -18,12 +18,31 @@ class Login extends Component {
           password: '',
           loginstatus:false,
           passwordShow:false,
-          passowrdInvalid:false
+          passowrdInvalid:false,
+          wrongEmail:false,
+          fillAllFields:false,
+          wrongPassword:false
         };
       }
        handleSubmit =event => {
         this.setState({passowrdInvalid:false});
+
+
         const { email, password } = this.state;
+        if ( email=='' || password=='') {
+          this.setState({fillAllFields:true});
+          //please fill all the fields
+          return;
+        }
+        if (!email.includes('@')) {
+          this.setState({wrongEmail:true});
+          return;
+        }
+        if (password.length < 6) {
+          this.setState({wrongPassword:true});
+          return;
+        }
+
                axios.post( 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBfd2HjJmstw4eqJzmzOmkOluVKNqs6yZc',
                {
                    email:email,
@@ -42,14 +61,23 @@ class Login extends Component {
       passwordShowHandler =()=>{
           var show= this.state.passwordShow;
           this.setState({passwordShow:!show});
+
       };
     
 
     
       handleChange = event => {
         const { value, name } = event.target;
-    
         this.setState({ [name]: value });
+        if(this.state.wrongEmail===true){
+          this.setState({wrongEmail:false});
+        }
+        if(this.state.fillAllFields===true){
+          this.setState({fillAllFields:false});
+        }
+        if(this.state.wrongPassword===true){
+          this.setState({wrongPassword:false});
+        }
       };
 
     render(){
@@ -76,8 +104,11 @@ class Login extends Component {
                     onChange={this.handleChange} 
                     placeholder='password'></input>
                     <PasswordShow onClick={this.passwordShowHandler}>{this.state.passwordShow ? 'Hide' : 'Show' }</PasswordShow>
-                    { this.state.passowrdInvalid ? <PasswordWrong>Wrong password!!</PasswordWrong> : null}
-
+                    { this.state.passowrdInvalid ? <PasswordWrong>Invalid credimentals!!</PasswordWrong> : null}
+                    { this.state.wrongEmail ? <PasswordWrong>Wrong email</PasswordWrong> : null}
+                    { this.state.fillAllFields ? <PasswordWrong>Please fill all the fields</PasswordWrong> : null}
+                    { this.state.wrongPassword ? <PasswordWrong>password should contain min 6 digits</PasswordWrong> : null}
+  
                     <BtnWrapper>
                     <GreenBtn type='button' onClick={this.handleSubmit}>login</GreenBtn>
                     <Link to='signIn'><GreyBtn>Sign-up</GreyBtn></Link>
