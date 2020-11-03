@@ -1,17 +1,17 @@
 import React from 'react';
-import {CardWrapper,DetailsWrapper} from './styles';
+import { CardWrapper, DetailsWrapper } from './styles';
 
 function ContactCard(props) {
-    return(
+    return (
         <>
-        <CardWrapper>
+            <CardWrapper>
                 <div><i className={props.logo} ></i></div>
                 <DetailsWrapper>
-                <strong>{props.tittle }</strong>
-                <span>{props.phoneNo}</span>
-                <a href='#'>{props.website}</a>
+                    <strong>{props.tittle}</strong>
+                    <span>{props.phoneNo}</span>
+                    <a href='#'>{props.website}</a>
                 </DetailsWrapper>
-        </CardWrapper>
+            </CardWrapper>
 
         </>
     )

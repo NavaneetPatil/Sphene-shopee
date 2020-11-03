@@ -1,51 +1,30 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
 import Collection from '../../components/Collection/Collection';
-import { connect } from 'react-redux';
-import Footer from '../../components/footer/footer';
-import Navigation from '../../components/navigation/navigation.component';
-import ColorSwitcher from '../../components/colorSwitcher/ColorSwitcher';
-import BackToTop from '../../components/backtotop/backToTop';
-import {Wallpaper} from '../../commonComponents';
+import { Wallpaper } from '../../commonComponents';
 import imgurl from '../../assets/images/shop-parallax-2.jpg';
-import {BlackScreen,Container} from '../../commonComponents';
+import { BlackScreen, Container } from '../../commonComponents';
 
 
+function ViewCollection() {
 
-class ViewCollection extends Component { 
+  const viewCollection = useSelector(state => state.hr.viewCollection);
 
-
-  componentDidMount=()=>{
+  useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    //console.log('go top is called')
-  }
+  }, []);
 
-
-
-
- render(){
   return (
     <>
-      <Navigation/>
       <Wallpaper img={imgurl}><BlackScreen><h2>our must have</h2></BlackScreen></Wallpaper>
-      <ColorSwitcher/>
       <Container>
-      <Collection 
-       obj={this.props.Arr} 
-       />
+        <Collection
+          obj={viewCollection}
+        />
       </Container>
-
-       <BackToTop/>
-       <Footer/>
     </>
   );
- } 
 }
 
-const mapStateToProps = state => {
-  return {
-      Arr: state.hr.viewCollection, 
-    }
-};
-
-export default connect(mapStateToProps,null)(ViewCollection);
+export default ViewCollection;

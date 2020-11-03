@@ -3,15 +3,18 @@ import './styles/App.css';
 import Routes from './router/route';
 import {ThemeProvider} from 'styled-components';
 import { connect } from 'react-redux';
+import MyProvider from './context/myContext';
 
 
 class App extends Component {
-render(){
 
+render(){
   return (
-    <ThemeProvider theme={this.props.theme}>
-         <Routes/>
-    </ThemeProvider>
+    <MyProvider>
+      <ThemeProvider theme={this.props.theme}>
+          <Routes/>
+      </ThemeProvider>
+    </MyProvider>
        
  );
 }

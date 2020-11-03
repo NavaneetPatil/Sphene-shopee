@@ -19,9 +19,7 @@ class Carousel extends Component {
             this.setState({img:wallpaper1,women:true,man:false});
         }
     };
-    //var timer=setInterval( wallpaperToggleHandler(), 2000 );
-    
-    
+     
     render(){
       return(      
       <div>

@@ -23,6 +23,13 @@ position:relative;
 background-color:${props=>props.theme.backgroundColor.BlackScreen};
 }
 `
+
+export const MessegeWrapper = styled.div`
+position:relative;
+display:block;
+background-color:${props=>props.theme.backgroundColor.green};
+}
+`
 export const OfficeAddressWrapper = styled.div`
 font-family:${props=>props.theme.fontFamily.quicksand};
 width:25%;
@@ -157,15 +164,16 @@ border:2px solid ${(props)=>props.theme.themeColor};
 }
 
 `
-export const SuccessMsg = styled.h4`
+export const SuccessMsg = styled.div`
 color:${props=>props.theme.color.lightest};
 font-weight:${props=>props.theme.fontWeight.bold};
-background-color:${props=>props.theme.backgroundColor.green};
+background-color:${props=>props.theme.backgroundColor.btnGreen} ;
 display: block;
-width: 100%;
-padding: 10px;
+padding: 0px 100px;
 `
-export const FailMsg = styled.h4`
+export const FailMsg = styled.p`
+margin:0;
+padding: 0px 80px;
 color:${props=>props.theme.color.fail};
 font-weight:${props=>props.theme.fontWeight.bold};
 `

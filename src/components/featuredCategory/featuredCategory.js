@@ -5,24 +5,15 @@ import { Container, CategoryTittle } from '../../commonComponents';
 import CategoryCard from '../categoryCard/categoryCard';
 import { FeaturedCategoryWrapper } from './styles';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import * as actionTypes from '../../pages/home/action';
 
 
 
 
 class FeaturedCategory extends Component { 
-    state = {
-      products: [],
-  }
   
   componentDidMount () {
-    axios.get( 'https://react-sphene-app-80aae.firebaseio.com/.json' )
-        .then( response => {
-           // const arr = response.data.slice(0, 8);
-            this.setState({products:response.data.HomeProducts});
-            //console.log( this.state.products );
-        } );
+    this.props.obtainCategoryProducts();
   }
   
   render(){
@@ -31,7 +22,7 @@ class FeaturedCategory extends Component {
             <Container>
                 <CategoryTittle>Featured Categories</CategoryTittle>
                 <FeaturedCategoryWrapper>     
-                               {this.state.products.slice(0,1).map((product)=>{
+                               {this.props.products.slice(0,1).map((product)=>{
                                    return(
                                     <CategoryCard 
                                     key={product.id}
@@ -39,13 +30,13 @@ class FeaturedCategory extends Component {
                                     to={'/viewCollection'}
                                     url={ require ('../../assets/images/'+product.url) }
                                     category={product.name}
-                                    clicked={()=>this.props.updateArr(product.relatedProducts)}
+                                    clicked={()=>this.props.updateViewArr(product.relatedProducts)}
                                    />
                                    )
                                })}
                          <div className="col-6">
                            <FeaturedCategoryWrapper>
-                               {this.state.products.slice(1,5).map((product)=>{
+                               {this.props.products.slice(1,5).map((product)=>{
                                    return(
                                     <CategoryCard 
                                     key={product.id}
@@ -53,7 +44,7 @@ class FeaturedCategory extends Component {
                                     to={'/viewCollection'}
                                     url={ require ('../../assets/images/'+product.url) }
                                     category={product.name}
-                                    clicked={()=>this.props.updateArr(product.relatedProducts)}
+                                    clicked={()=>this.props.updateViewArr(product.relatedProducts)}
                                    />
                                    )
                                })}
@@ -65,13 +56,19 @@ class FeaturedCategory extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+    return {
+        products:state.hr.categoryProducts,
+      }
+  };
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateArr:(product) => dispatch({type: actionTypes.UPDATE,arr:product})
+        updateViewArr:(product) => dispatch({type: actionTypes.UPDATE_VIEW_COLLECTION,arr:product}),
+        obtainCategoryProducts:() => dispatch({type: actionTypes.INITIATE_CATEGORY_PRODUCTS}),
+        
     }
 };
 
-
-export default connect(null,mapDispatchToProps)(FeaturedCategory);  
+export default connect(mapStateToProps,mapDispatchToProps)(FeaturedCategory);  
   

@@ -7,6 +7,7 @@ import {Form, ImageWrapper,PasswordShow,PasswordWrong,
   LoginWrapper,LoginH3, BtnWrapper,GreyBtn,GreenBtn} from './styles';
 import bagurl from '../../assets/images/shop-demo-category-01.jpg';
 import axios from 'axios';
+import Loading from '../../components/loading/loading';
 
 
 class Login extends Component { 
@@ -24,6 +25,7 @@ class Login extends Component {
           wrongPassword:false
         };
       }
+      
        handleSubmit =event => {
         this.setState({passowrdInvalid:false});
 
@@ -42,21 +44,25 @@ class Login extends Component {
           this.setState({wrongPassword:true});
           return;
         }
+        localStorage.setItem("email", this.state.email);
+        localStorage.setItem("password", this.state.password);
+        this.props.logInHandler();
 
-               axios.post( 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBfd2HjJmstw4eqJzmzOmkOluVKNqs6yZc',
-               {
-                   email:email,
-                   password:password
-               } )
-               .then((response)=>{
-                this.props.logInHandler();
-                this.setState({loginstatus:true});
-                this.props.emailSetHandler(email);
-                history.push("/home");
-                //console.log(response.data);
-               },(error)=>{
-                this.setState({passowrdInvalid:true});
-               })  
+              //  axios.post( 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBfd2HjJmstw4eqJzmzOmkOluVKNqs6yZc',
+              //  {
+              //      email:email,
+              //      password:password
+              //  } )
+              //  .then((response)=>{
+              //   this.props.logInHandler();
+              //   this.setState({loginstatus:true});
+              //   this.props.emailSetHandler(email);
+              //   history.push("/home");
+              //   //console.log(response.data);
+              //  },(error)=>{
+              //   this.setState({passowrdInvalid:true});
+              //  })  
+     
       };
       passwordShowHandler =()=>{
           var show= this.state.passwordShow;
@@ -78,13 +84,18 @@ class Login extends Component {
         if(this.state.wrongPassword===true){
           this.setState({wrongPassword:false});
         }
+        if(this.props.invalidPassword===true){ 
+          this.props.wrongPasswordAlertHandler();
+        }
+
       };
 
-    render(){
-
+    render(){     
+      
       const  {email,password}=this.state;
         return(
             <LoginWrapper>
+              <Loading/>
             <ImageWrapper><img src={bagurl} ></img></ImageWrapper>  
                 <Form>
 
@@ -104,7 +115,7 @@ class Login extends Component {
                     onChange={this.handleChange} 
                     placeholder='password'></input>
                     <PasswordShow onClick={this.passwordShowHandler}>{this.state.passwordShow ? 'Hide' : 'Show' }</PasswordShow>
-                    { this.state.passowrdInvalid ? <PasswordWrong>Invalid credimentals!!</PasswordWrong> : null}
+                    { this.props.invalidPassword ? <PasswordWrong>Invalid credentials!!</PasswordWrong> : null}
                     { this.state.wrongEmail ? <PasswordWrong>Wrong email</PasswordWrong> : null}
                     { this.state.fillAllFields ? <PasswordWrong>Please fill all the fields</PasswordWrong> : null}
                     { this.state.wrongPassword ? <PasswordWrong>password should contain min 6 digits</PasswordWrong> : null}
@@ -127,13 +138,15 @@ class Login extends Component {
 const mapStateToProps = (state) => {
   return {
       loginstatus:state.lr.loginStatus, 
+      invalidPassword:state.lr.invalidPassword,
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        logInHandler:() => dispatch({type: actionTypes.LOGIN}),
+        logInHandler:() => dispatch({type: actionTypes.LOGIN_INITIATE}),
         emailSetHandler:(email) => dispatch({type: actionTypes.EMAIL, val:email}),
+        wrongPasswordAlertHandler:() => dispatch({type:actionTypes.WRONG_PASS_ALERT_STOP}),
     }
 };
 

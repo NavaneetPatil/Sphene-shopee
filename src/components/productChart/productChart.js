@@ -1,31 +1,28 @@
-import React,{Component} from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Container } from '../../commonComponents';
 import WidgetCard from '../widget/widgetCard';
 import { ChartWrapper, ColWrapper } from './styles';
 import {WidgetCol, ColHeading} from '../../commonComponents';
 import axios from 'axios';
-//import { render } from 'node-sass';
 
 
 
+function ProductChart() {
 
-class ProductChart extends Component {
-    state = {
-        bestSeller:[],
-        onSale:[],
-        topRated:[]
-    }
-    
-    componentDidMount () {
-        axios.get( './myjson.json')
-            .then( response => {
-                this.setState({bestSeller:response.data.bestSeller});
-                this.setState({onSale:response.data.onSale}) ;
-                this.setState({topRated:response.data.topRated}) ;
-            } );
-      }
+const [bestSeller, setBestSeller] = useState([]);
+const [onSale, setOnSale] = useState([]);
+const [topRated, setTopRated] = useState([]);
 
-    render(){
+useEffect(() => {
+    axios.get( './myjson.json')
+    .then( response => {
+            setBestSeller(response.data.bestSeller);
+            setOnSale(response.data.onSale);
+            setTopRated(response.data.topRated);
+    } );     
+  },[]);
+
+
     return (
         <>
             <ChartWrapper>
@@ -33,7 +30,7 @@ class ProductChart extends Component {
                     <ColWrapper>
                         <WidgetCol>
                             <ColHeading><i className='fa fa-shopping-bag'></i>Best Sellers</ColHeading>
-                            {this.state.bestSeller.map((p) => {
+                            { bestSeller.map((p) => {
                                 return (
                                     <WidgetCard
                                         key={p.id}
@@ -46,7 +43,7 @@ class ProductChart extends Component {
                         </WidgetCol>
                         <WidgetCol>
                             <ColHeading><i className='fa fa-star'></i>Top Rated</ColHeading>
-                            {this.state.topRated.map((p) => {
+                            {topRated.map((p) => {
                                 return (
                                     <WidgetCard
                                         key={p.id}
@@ -60,7 +57,7 @@ class ProductChart extends Component {
                         </WidgetCol>
                         <WidgetCol>
                             <ColHeading><i className='fa fa-tag'></i>On Sale</ColHeading>
-                            {this.state.onSale.map((p) => {
+                            {onSale.map((p) => {
                                 return (
                                     <WidgetCard
                                         key={p.id}
@@ -78,8 +75,8 @@ class ProductChart extends Component {
             </ChartWrapper>
         </>
     );
-                        }
-}
+ }
+
 
 export default ProductChart;
 

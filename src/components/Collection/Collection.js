@@ -2,8 +2,6 @@ import React from 'react';
 import Card from '../productsCarsousel/card/Card';
 import {AllProductsWrapper} from '../../commonComponents';
 
-
-
 function Collection(props) {
   return (
     <>

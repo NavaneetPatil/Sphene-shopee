@@ -27,6 +27,9 @@ margin-left: auto;
   justify-content:flex-start;
   margin:0 20px;
   width:100%;
+  @media (min-width: 250px) and (max-width: 768px) {
+    justify-content:center;
+  }
 
   `
 

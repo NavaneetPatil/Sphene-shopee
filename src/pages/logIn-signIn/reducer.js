@@ -2,7 +2,9 @@ import * as actionTypes from './action';
 
 const initialState = {
     loginStatus:undefined,// lock for our app, true measns its open, undefined- login is mandetory,false-its locked
-    email:''
+    email:'',
+    loading:false,
+    invalidPassword:false
 };
 
 const reducer = ( state = initialState, action ) => {
@@ -10,12 +12,29 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.LOGIN:
             return {
                 ...state,
-                loginStatus:true
+                loginStatus:true,
+                loading:false
+            }
+        case actionTypes.LOGIN_INITIATE:
+            return {
+                 ...state,
+                 loading:true
+            }    
+        case actionTypes.LOGIN_FAIL:
+            return {
+                 ...state,
+                 loading:false,
+                 invalidPassword:true
             }
         case actionTypes.LOGOUT:
             return {
              ...state,
               loginStatus:false
+            }
+        case actionTypes.WRONG_PASS_ALERT_STOP:
+                return {
+                 ...state,
+                 invalidPassword:false
             }
         case actionTypes.EMAIL:
             return {
