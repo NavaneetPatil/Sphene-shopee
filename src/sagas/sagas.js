@@ -17,7 +17,6 @@ function* login() {
   catch {
     yield put({ type: "LOGIN_FAIL" });
   }
-
 }
 
 function* categoryProductsUpdate() {
@@ -36,9 +35,6 @@ function* getShopProducts() {
   yield put({ type: "UPDATE_SHOP_PRODUCTS", productsArr: json });
 
 }
-
-
-
 
 
 function* actionWatcher() {

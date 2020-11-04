@@ -2,11 +2,9 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import * as actionTypes from './action';
 import {Link, Route} from 'react-router-dom';
-import history from '../../history/history';
 import {Form, ImageWrapper,PasswordShow,PasswordWrong, 
   LoginWrapper,LoginH3, BtnWrapper,GreyBtn,GreenBtn} from './styles';
 import bagurl from '../../assets/images/shop-demo-category-01.jpg';
-import axios from 'axios';
 import Loading from '../../components/loading/loading';
 
 
@@ -47,21 +45,6 @@ class Login extends Component {
         localStorage.setItem("email", this.state.email);
         localStorage.setItem("password", this.state.password);
         this.props.logInHandler();
-
-              //  axios.post( 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBfd2HjJmstw4eqJzmzOmkOluVKNqs6yZc',
-              //  {
-              //      email:email,
-              //      password:password
-              //  } )
-              //  .then((response)=>{
-              //   this.props.logInHandler();
-              //   this.setState({loginstatus:true});
-              //   this.props.emailSetHandler(email);
-              //   history.push("/home");
-              //   //console.log(response.data);
-              //  },(error)=>{
-              //   this.setState({passowrdInvalid:true});
-              //  })  
      
       };
       passwordShowHandler =()=>{

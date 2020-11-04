@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../../styles/customStyles.css';
-import { withTheme } from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import * as actionTypes from '../../pages/logIn-signIn/action';
@@ -49,4 +48,4 @@ function Navigation() {
 
 }
  
-export default (withTheme(Navigation));
+export default Navigation;

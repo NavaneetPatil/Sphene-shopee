@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import { Router,Route,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actionTypes from '../pages/logIn-signIn/action';
 import Profile from '../pages/profile/profile';  
 import Home from '../pages/home/home';  
 import ViewCollection from '../pages/viewCollection/viewCollection';
